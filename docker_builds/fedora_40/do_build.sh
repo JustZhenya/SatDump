@@ -7,7 +7,7 @@ cd /root
 dnf install -x mesa-va-drivers -x mesa-va-drivers -y cmake gcc g++ git p7zip p7zip-plugins wget xxd libtool autoconf rpmdevtools pkgconf \
     fftw-devel glfw-devel volk-devel libzstd-devel libiio-devel libcorrect-devel \
     hackrf-devel rtl-sdr-devel portaudio-devel \
-    libpng-devel curl-devel libjpeg-devel libtiff-devel jemalloc-devel hdf5-devel uhd-devel nng-devel ocl-icd-devel libomp-devel
+    libpng-devel curl-devel libjpeg-devel libtiff-devel jemalloc-devel hdf5-devel uhd-devel nng-devel ocl-icd-devel libomp-devel boost-devel
 
 # Install SDRPlay libraries
 wget https://www.sdrplay.com/software/SDRplay_RSP_API-Linux-3.15.1.run
