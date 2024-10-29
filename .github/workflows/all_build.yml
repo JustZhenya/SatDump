@@ -172,38 +172,6 @@ jobs:
           name: SatDump-Windows_arm64_Portable
           path: ${{runner.workspace}}/build/Release/*
 
-  build_android:
-    runs-on: android-release
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Get dependency version
-        id: android-deps-ver
-        run: commit=$(git -C $GITHUB_WORKSPACE submodule status | grep android) && echo deps_version=${commit:1:6} >> $GITHUB_OUTPUT
-
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        id: android-deps
-        with:
-          path: android/deps
-          key: android-deps-${{steps.android-deps-ver.outputs.deps_version}}
-
-      - name: Build dependencies
-        if: steps.android-deps.outputs.cache-hit != 'true'
-        shell: bash
-        run: git submodule update --init && cd $GITHUB_WORKSPACE/android/deps && export ANDROID_HOME=/home/owner/android-sdk-linux && sh build.sh && rm .git
-
-      - name: Build
-        shell: bash
-        run: cd $GITHUB_WORKSPACE/android && export ANDROID_HOME=/home/owner/android-sdk-linux && sh /home/owner/build_release.sh
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: SatDump-release.apk
-          path: ${{runner.workspace}}/SatDump/android/app/build/outputs/apk/release/app-release.apk
-
   build_ubuntu_2204:
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
@@ -461,8 +429,7 @@ jobs:
         "build_ubuntu_2404",
         "build_macos_intel",
         "build_macos_silicon",
-        "build_fedora_40",
-        "build_android"]
+        "build_fedora_40"]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
@@ -484,7 +451,6 @@ jobs:
           cp SatDump-Windows_x64_Installer/SatDump-*.exe satdump_out/SatDump-Windows_x64_Installer.exe &&
           (cd SatDump-Windows_arm64_Portable && zip -r ../satdump_out/SatDump-Windows_arm64_Portable.zip *) &&
           cp SatDump-Windows_arm64_Installer/SatDump-*.exe satdump_out/SatDump-Windows_arm64_Installer.exe &&
-          cp SatDump-release.apk/app-release.apk satdump_out/SatDump-Android.apk &&
           cp satdump_fedora_40_x86_64/satdump-1.2.2.$GITHUB_RUN_NUMBER-1.x86_64.rpm satdump_out/satdump_fedora_40_x86_64.rpm
 
       - name: Update Nightly
