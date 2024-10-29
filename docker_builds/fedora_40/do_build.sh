@@ -22,5 +22,4 @@ cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j`nproc`
 
-cd ..
-sh make_rpm_package.sh ./build
+sh make_rpm_package.sh

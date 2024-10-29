@@ -27,13 +27,20 @@ A generic satellite data processing software.
 /sbin/ldconfig
 
 %files
-*
+/usr/share/satdump
+/usr/lib64/satdump/plugins
+/usr/bin/satdump
+/usr/bin/satdump-ui
+/usr/bin/satdump_sdr_server
+/usr/lib64/libsatdump_core.so
+/usr/lib64/libsatdump_interface.so
+/usr/share/applications/satdump.desktop
 EOF
 
 # Copying files
 echo Copy files
-cd $1
 make install DESTDIR=~/rpmbuild/BUILDROOT/satdump-1.2.2$BUILD_NO-1.x86_64/
+rm -rf /root/rpmbuild/BUILDROOT/satdump-1.2.2$BUILD_NO-1.x86_64/usr/include/
 
 # Create package
 echo Create package
