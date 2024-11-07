@@ -2,7 +2,6 @@
 
 # Create directory structure
 echo Create directory structure
-cd ~
 rpmdev-setuptree
 
 # Copying files
@@ -45,5 +44,4 @@ EOF
 
 # Create package
 echo Create package
-cd ~/rpmbuild/SPECS
-rpmbuild -ba satdump.spec
+rpmbuild -ba ~/rpmbuild/SPECS/satdump.spec
