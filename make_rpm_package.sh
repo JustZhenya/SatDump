@@ -7,6 +7,7 @@ rpmdev-setuptree
 # Create package info
 cat <<EOF >> ~/rpmbuild/SPECS/satdump.spec
 %global __requires_exclude libhackrf.so.0|libportaudio.so.2|librtlsdr.so.0|libsdrplay_api.so.3
+%define _unpackaged_files_terminate_build 0
 
 Name:       satdump
 Version:    1.2.2
