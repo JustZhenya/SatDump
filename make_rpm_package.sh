@@ -4,10 +4,6 @@
 echo Create directory structure
 rpmdev-setuptree
 
-# Copying files
-echo Copy files
-make install DESTDIR=~/satdump-build/
-
 # Create package info
 cat <<EOF >> ~/rpmbuild/SPECS/satdump.spec
 %global __requires_exclude libhackrf.so.0|libportaudio.so.2|librtlsdr.so.0|libsdrplay_api.so.3
@@ -22,8 +18,9 @@ License:    GPLv3+
 %description
 A generic satellite data processing software.
 
-%build
-mv ~/satdump-build/* .
+%install
+cd ~/SatDump/build
+%make_install
 
 %post
 /sbin/ldconfig
