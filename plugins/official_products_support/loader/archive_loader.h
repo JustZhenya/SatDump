@@ -10,11 +10,23 @@ namespace satdump
     class ArchiveLoader
     {
     private:
-        bool first_run = true;
         widgets::DateTimePicker request_time;
-
         widgets::FileDownloaderWidget file_downloader;
 
+    private: // GOES-R AWS
+        int goesr_aws_selected_dataset = 0;
+        struct GoesAwsElement
+        {
+            time_t tim;
+            std::string timestamp;
+            std::map<int, std::string> channels;
+        };
+        std::vector<GoesAwsElement> goesr_aws_list;
+
+        void renderGOESRAWS(ImVec2 wsize);
+        void updateGOESRAWS();
+
+    private: // EUMETSAT
         int eumetsat_selected_dataset = 0;
         struct EumetsatElement
         {
@@ -25,6 +37,7 @@ namespace satdump
         std::vector<EumetsatElement> eumetsat_list;
 
         void renderEumetsat(ImVec2 wsize);
+        void updateEUMETSAT();
 
     public:
         std::string products_download_and_process_directory;
@@ -36,8 +49,6 @@ namespace satdump
     public:
         ArchiveLoader();
         ~ArchiveLoader();
-
-        void updateEUMETSAT();
 
         void drawUI(bool *_open);
     };

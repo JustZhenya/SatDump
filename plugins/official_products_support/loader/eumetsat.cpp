@@ -164,6 +164,8 @@ namespace satdump
         if (ImGui::Button("Refresh##archiveloader_refresh"))
             updateEUMETSAT();
 
+        ImGui::TextUnformatted("Date: ");
+        ImGui::SameLine();
         request_time.draw();
         ImGui::SameLine();
         if (ImGui::Button("Current##archiveloader_setcurrenttime"))
@@ -235,7 +237,7 @@ namespace satdump
                             }
                             catch (std::exception &e)
                             {
-                                logger->error("Failed downloading file from EUMETSAT: %s", e.what());
+                                logger->error("Failed downloading file from EUMETSAT! %s", e.what());
                             }
                         };
 
