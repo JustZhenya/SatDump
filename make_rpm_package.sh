@@ -10,7 +10,7 @@ cat <<EOF >> ~/rpmbuild/SPECS/satdump.spec
 %define _unpackaged_files_terminate_build 0
 
 Name:       satdump
-Version:    1.2.2
+Version:    1.2.3
 Release:    $BUILD_NO
 Summary:    SatDump
 Recommends: libhackrf.so.0()(64bit), libportaudio.so.2()(64bit), librtlsdr.so.0()(64bit), libsdrplay_api.so.3()(64bit)
