@@ -412,13 +412,13 @@ jobs:
 
     - name: Recover RPM Archive
       working-directory: ${{runner.workspace}}
-      run: docker cp build:/root/rpmbuild/RPMS/x86_64/satdump-1.2.2-$GITHUB_RUN_NUMBER.x86_64.rpm ./
+      run: docker cp build:/root/rpmbuild/RPMS/x86_64/satdump-1.2.3-$GITHUB_RUN_NUMBER.x86_64.rpm ./
 
     - name: Save RPM Archive
       uses: actions/upload-artifact@v4
       with:
           name: satdump_fedora_40_x86_64
-          path: ${{runner.workspace}}/satdump-1.2.2-${{github.run_number}}.x86_64.rpm
+          path: ${{runner.workspace}}/satdump-1.2.3-${{github.run_number}}.x86_64.rpm
   
   build_fedora_41:
     runs-on: ubuntu-latest
@@ -434,13 +434,13 @@ jobs:
 
     - name: Recover RPM Archive
       working-directory: ${{runner.workspace}}
-      run: docker cp build:/root/rpmbuild/RPMS/x86_64/satdump-1.2.2-$GITHUB_RUN_NUMBER.x86_64.rpm ./
+      run: docker cp build:/root/rpmbuild/RPMS/x86_64/satdump-1.2.3-$GITHUB_RUN_NUMBER.x86_64.rpm ./
 
     - name: Save RPM Archive
       uses: actions/upload-artifact@v4
       with:
           name: satdump_fedora_41_x86_64
-          path: ${{runner.workspace}}/satdump-1.2.2-${{github.run_number}}.x86_64.rpm
+          path: ${{runner.workspace}}/satdump-1.2.3-${{github.run_number}}.x86_64.rpm
 
   # Yes, since I was asked to do like SDR++ for this I did look at how Ryzerth has done it :-)
   update_nightly_release:
@@ -474,8 +474,8 @@ jobs:
           cp SatDump-Windows_x64_Installer/SatDump-*.exe satdump_out/SatDump-Windows_x64_Installer.exe &&
           (cd SatDump-Windows_arm64_Portable && zip -r ../satdump_out/SatDump-Windows_arm64_Portable.zip *) &&
           cp SatDump-Windows_arm64_Installer/SatDump-*.exe satdump_out/SatDump-Windows_arm64_Installer.exe &&
-          cp satdump_fedora_40_x86_64/satdump-1.2.2-$GITHUB_RUN_NUMBER.x86_64.rpm satdump_out/satdump_fedora_40_x86_64.rpm &&
-          cp satdump_fedora_41_x86_64/satdump-1.2.2-$GITHUB_RUN_NUMBER.x86_64.rpm satdump_out/satdump_fedora_41_x86_64.rpm
+          cp satdump_fedora_40_x86_64/satdump-1.2.3-$GITHUB_RUN_NUMBER.x86_64.rpm satdump_out/satdump_fedora_40_x86_64.rpm &&
+          cp satdump_fedora_41_x86_64/satdump-1.2.3-$GITHUB_RUN_NUMBER.x86_64.rpm satdump_out/satdump_fedora_41_x86_64.rpm
 
       - name: Update Nightly
         run: gh release upload nightly satdump_out/* -R ${{github.repository}} --clobber
